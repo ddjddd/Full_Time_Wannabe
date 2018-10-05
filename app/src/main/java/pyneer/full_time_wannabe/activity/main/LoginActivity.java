@@ -17,18 +17,18 @@ import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
 
 /**
- * 로그인화면
+ * Log_in activity
  */
 
 public class LoginActivity extends AppCompatActivity {
-    @BindView(R.id.editEmail)
-    EditText editEmail;
-    @BindView(R.id.editPassword)
-    EditText editPassword;
-    @BindView(R.id.btnLogin)
-    Button btnLogin;
-    @BindView(R.id.btnSignup)
-    Button btnSignup;
+    @BindView(R.id.ed_email)
+    EditText ed_email;
+    @BindView(R.id.ed_password)
+    EditText ed_password;
+    @BindView(R.id.btn_login)
+    Button btn_login;
+    @BindView(R.id.btn_signup)
+    Button btn_signup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btnLogin)
+    @OnClick(R.id.btn_login)
     public void onClickLogin() {
         String email, password;
-        email = editEmail.getText().toString();
-        password = editPassword.getText().toString();
+        email = ed_email.getText().toString();
+        password = ed_password.getText().toString();
 
         // 로그인 검증 시도
         if (email.length() < 5 || password.length() < 6) {
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btnSignup)
+    @OnClick(R.id.btn_signup)
     public void onBtnSignup() {
         // 회원가입용 다이얼로그 생성
         MaterialDialog dialog =
@@ -71,6 +71,12 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
+    /*
+     사용자 타입 구분 필요
+     알바생(model name : user) vs. 관리자
+        추가 - 버튼, 회원가입, 관리자 모델
+     */
 
     private void doRegister(View registerView) {
         // 회원가입 시 필요 행동 추가
