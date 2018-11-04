@@ -6,32 +6,81 @@
     android:layout_height="match_parent"
     android:background="#f0f0f0"
     android:orientation="vertical">
+
+
+
+    //전체 레이아웃
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
+        //제목 라인
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+            //android:background="green">
+
+            //여기에 버튼 만들자
+
+
+
+            <Button
+                android:id="@+id/GotoMenu"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="메뉴버튼" />
+
+            //여기에 계정 관리 텍스트
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="계정 관리"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"/>
+
+
+        </LinearLayout>
+
+
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:orientation="vertical">
 
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
+
+
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/main_profile_pic"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_height="38dp"
                     android:layout_alignParentStart="true"
-                    android:layout_marginBottom="5dp"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
                     android:elevation="2dp"
                     app:civ_border_color="#dddddd"
                     app:civ_border_width="5dp" />
