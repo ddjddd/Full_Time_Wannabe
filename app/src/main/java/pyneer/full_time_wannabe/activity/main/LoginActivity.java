@@ -15,12 +15,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
+import pyneer.full_time_wannabe.api.OnRestApiListener;
+import pyneer.full_time_wannabe.api.RestApiResult;
+import pyneer.full_time_wannabe.api.RestApiTask;
+import pyneer.full_time_wannabe.api.implement.Signup;
 
 /**
  * Log_in activity
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements OnRestApiListener {
     @BindView(R.id.ed_email)
     EditText ed_email;
     @BindView(R.id.ed_password)
@@ -78,7 +82,26 @@ public class LoginActivity extends AppCompatActivity {
         추가 - 버튼, 회원가입, 관리자 모델
      */
 
+
     private void doRegister(View registerView) {
-        // 회원가입 시 필요 행동 추가
+        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
+        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
+        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
+        Signup register = new Signup();
+        register.setEmail(id);
+        register.setPw(pw);
+        register.setName(name);
+        new RestApiTask(this).execute(register);
+    }
+
+    @Override
+    public void onRestApiDone(RestApiResult restApiResult) {
+        switch (restApiResult.getApiName()) {
+//            case "login":
+//                break;
+            case "register":
+                new MaterialDialog.Builder(this).content("가입이 완료되었습니다.").show();
+                break;
+        }
     }
 }
