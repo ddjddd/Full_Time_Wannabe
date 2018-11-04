@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements OnRestApiListene
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                doRegister(dialog.getCustomView());
+//                                doRegister(dialog.getCustomView());
                             }
                         })
                         .build();
@@ -83,16 +83,16 @@ public class LoginActivity extends AppCompatActivity implements OnRestApiListene
      */
 
 
-    private void doRegister(View registerView) {
-        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
-        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
-        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
-        Signup register = new Signup();
-        register.setEmail(id);
-        register.setPw(pw);
-        register.setName(name);
-        new RestApiTask(this).execute(register);
-    }
+//    private void doRegister(View registerView) {
+////        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
+////        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
+////        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
+//        Signup register = new Signup();
+//        register.setEmail(id);
+//        register.setPw(pw);
+//        register.setName(name);
+//        new RestApiTask(this).execute(register);
+//    }
 
     @Override
     public void onRestApiDone(RestApiResult restApiResult) {
