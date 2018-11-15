@@ -11,7 +11,7 @@ public class Constants {
     public static final Class[] ACTIVITES = {
             MainActivity.class,
             LoginActivity.class,
-            MessengerActivity.class
+            MessengerActivity.class,
             LoginActivity.class,
             LoadingActivity.class
     };
