@@ -13,4 +13,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="btn.Default" parent="@android:style/Widget.Button">
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">@drawable/btn_base_teal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorFont</item>
+    </style>
+
 </resources>
