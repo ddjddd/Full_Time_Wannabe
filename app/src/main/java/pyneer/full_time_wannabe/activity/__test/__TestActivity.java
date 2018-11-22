@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pyneer.full_time_wannabe.R;
+import pyneer.full_time_wannabe.activity.main.LoadingActivity;
 import pyneer.full_time_wannabe.utility.Constants;
 
 
@@ -28,6 +29,7 @@ public class __TestActivity extends AppCompatActivity {
         setContentView(R.layout.__activity_test);
         ButterKnife.bind(this);
 
+        startActivity(new Intent(this,LoadingActivity.class));
 
         final ArrayList<String> activites = new ArrayList<>();
         for(Class c : Constants.ACTIVITES) {

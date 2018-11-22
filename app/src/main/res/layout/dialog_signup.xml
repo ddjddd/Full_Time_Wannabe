@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edittext_signup_name"
+            android:id="@+id/ed_signup_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edittext_signup_id"
+            android:id="@+id/ed_signup_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edittext_signup_password"
+            android:id="@+id/ed_signup_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"

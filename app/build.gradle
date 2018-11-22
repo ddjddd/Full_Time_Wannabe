@@ -47,4 +47,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    compile 'com.google.firebase:firebase-database:11.0.2'
 }
+//apply plugin: 'com.google.gms.google-services'
