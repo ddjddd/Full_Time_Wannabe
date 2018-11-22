@@ -51,6 +51,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <activity android:name=".activity.main.StatisticsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
