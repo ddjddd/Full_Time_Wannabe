@@ -47,6 +47,10 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.main.LoadingActivity"></activity>
 
+        <activity android:name=".activity.main.MessengerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
