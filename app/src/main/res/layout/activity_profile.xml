@@ -2,6 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0f0f0"
@@ -31,8 +32,8 @@
             <Button
                 android:id="@+id/GotoMenu"
                 android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:text="메뉴버튼" />
+                android:layout_height="wrap_content"
+                android:text="" />
 
             //여기에 계정 관리 텍스트
             <TextView
@@ -45,45 +46,52 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"/>
 
-
         </LinearLayout>
 
-
-
-
-
+        //사진,이름,전화번호 레이아웃
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
+            //프로필 사진
+            <!--<ImageView-->
+                <!--android:id="@+id/imageView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--tools:srcCompat="@tools:sample/avatars[0]" />-->
 
+            //리얼 프로필사진
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_profile_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="2dp"
+                app:civ_border_color="#dddddd"
+                app:civ_border_width="5dp"
+                />
 
-
+            //이름하고 전화번호 레이아웃
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
-
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/main_profile_pic"
+                <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:elevation="2dp"
-                    app:civ_border_color="#dddddd"
-                    app:civ_border_width="5dp" />
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
 
                 <TextView
                     android:id="@+id/tv_profile_name"
@@ -94,6 +102,8 @@
                     android:gravity="center"
                     android:textColor="#fff"
                     android:textSize="23sp" />
+
+
 
 
             </LinearLayout>
