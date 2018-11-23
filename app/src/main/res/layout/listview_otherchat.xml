@@ -6,32 +6,35 @@
     android:gravity="left">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:gravity="left"
-        android:layout_margin="3dp">
+        android:orientation="vertical"
+
+
+       >
 
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="13dp"
+            android:paddingLeft="3dp"
             android:text="진호"
             android:textColor="@color/colorFont"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_msg"
-            android:text="보낸메시지"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
+            android:background="@color/grey_light"
             android:paddingLeft="12dp"
+            android:paddingTop="9dp"
             android:paddingRight="12dp"
-            android:background="@drawable/chat_otherchat"
-            android:textColor="@color/colorPrimary"
+            android:paddingBottom="9dp"
+            android:text="보낸메시지"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
