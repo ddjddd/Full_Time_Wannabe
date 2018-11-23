@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#BC5F6A</color>
     <color name="colorAccent">#19B3B1</color>
     <color name="colorFont">#034B61</color>
+    <color name="grey_light">#AAA</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
+
 
     <color name="btn_base_teal">#ffa3a5</color>
 

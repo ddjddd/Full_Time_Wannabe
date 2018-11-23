@@ -21,5 +21,5 @@ public class LoadingActivity extends Activity {
             }
         },3000);
     }
-    
+
 }
