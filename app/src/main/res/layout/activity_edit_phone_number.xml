@@ -46,7 +46,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="계정 관리"
+                android:text="연락처 관리"
                 android:textSize="30dp"
                 android:gravity="center_vertical"/>
 
@@ -127,33 +127,32 @@
 
                 </LinearLayout>
 
-                //전화번호랑 수정 버튼
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:gravity="center_horizontal">-->
 
-                    <TextView
-                        android:id="@+id/phone_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:textColor="#fff"
-                        android:textSize="20sp"
-                        android:text="010-1111-1111"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/phone_number"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="left"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:textColor="#fff"-->
+                        <!--android:textSize="20sp"-->
+                        <!--android:text="010-1111-1111"/>-->
 
-                    <ImageButton
-                        android:id="@+id/edit_phone_number"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        app:srcCompat="@android:drawable/ic_menu_edit"
-                        android:background="@color/colorPrimary"/>
-
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/edit_phone_number"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--app:srcCompat="@android:drawable/ic_menu_edit"-->
+                        <!--android:background="@color/colorPrimary"/>-->
 
 
-                </LinearLayout>
+
+                <!--</LinearLayout>-->
 
 
 
@@ -166,113 +165,31 @@
 
         </LinearLayout>
 
-
-        //근무지
+        //수정하는 란
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#fff"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:id="@+id/Work_place_txt"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:text="근무지"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:background="#3CB3"/>
-
-                <ImageButton
-                    android:id="@+id/edit_work_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/ic_menu_edit"
-                    android:background="#fff"
-                    android:layout_marginLeft="200dp"/>
-
-
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/Work_place_list"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:divider="@null"
-                android:dividerHeight="0dp">
-
-            </ListView>
-
-
-        </LinearLayout>
-
-
-        //급여계좌
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#fff"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
-
-            <!--<TextView-->
-                <!--android:id="@+id/Account_txt"-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:text="급여계좌"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="#3CB3"/>-->
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:id="@+id/Account_txt"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:text="급여계좌"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:background="#3CB3"/>
-
-                <ImageButton
-                    android:id="@+id/edit_Account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/ic_menu_edit"
-                    android:background="#fff"
-                    android:layout_marginLeft="200dp"/>
-
-
-            </LinearLayout>
 
             <TextView
-                android:id="@+id/Account"
-                android:layout_width="match_parent"
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="농협 123-23-2123412"
-                android:textSize="15dp"
-                android:gravity="left"
-                android:layout_marginLeft="30dp"
-                android:layout_marginVertical="10dp"/>
+                android:layout_weight="1"
+                android:text="전화번호 수정"
+                android:textSize="20dp"
+                android:layout_margin="@dimen/labels_text_size"/>
 
-
-
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="phone"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                />
         </LinearLayout>
 
 
@@ -287,17 +204,17 @@
             >
 
             <Button
-                android:id="@+id/LogOut"
+                android:id="@+id/Undo"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
+                android:text="취소"
                 android:layout_marginLeft="20dp"/>
 
             <Button
-                android:id="@+id/Withdrawal"
+                android:id="@+id/edit"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="회원탈퇴"
+                android:text="수정"
                 android:layout_marginLeft="10dp"/>
 
 
