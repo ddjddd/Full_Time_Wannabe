@@ -2,11 +2,16 @@ package pyneer.full_time_wannabe.activity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
 
     ChatAdapter adapter;
     ChatListData chatListData;
+    ActionBar actionBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,13 +61,50 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = new Intent(this.getIntent());
         chatListData = (ChatListData) intent.getSerializableExtra("chat_list_data");
         CHAT_NAME = chatListData.getChatName();
+        setToolBar(CHAT_NAME);
+        setChatListener(CHAT_NAME);
+    }
 
-        openChat(CHAT_NAME);
+    private void setToolBar(String title) {
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
+        actionBar.setTitle(title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+
+    // ToolBar 에 추가된 항목의 select 이벤트를 처리하는 함수
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_settings1:
+                // User chose the "Settings" item, show the app settings UI...
+                Toast.makeText(getApplicationContext(), "1번 메뉴 클릭", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.action_settings2:
+                // User chose the "Settings" item, show the app settings UI...
+                Toast.makeText(getApplicationContext(), "2번 메뉴 클릭", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private String tmp = "";
-
-    private void addMessage(DataSnapshot dataSnapshot, ChatAdapter adapter) {
+    private void addChat(DataSnapshot dataSnapshot, ChatAdapter adapter) {
         ChatData chatData = dataSnapshot.getValue(ChatData.class);
         // 내 chat 인지 확인
         String tUserName = chatData.getUserName();
@@ -76,24 +119,26 @@ public class ChatActivity extends AppCompatActivity {
             chatData.setType(ITEM_VIEW_TYPE_OTHERCHAT);
             tmp = tUserName;
         }
-        adapter.add(chatData);
+        if(chatData != null) {
+            adapter.add(chatData);
+        }
     }
 
     // 채팅방 열었을때 내용 표시
-    private void openChat(String chatName) {
+    private void setChatListener(String chatName) {
         adapter = new ChatAdapter();
         lv_chat.setAdapter(adapter);
 
-        // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
+        // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등
         dbRef.child("chat").child(chatName).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                addMessage(dataSnapshot, adapter);
+                addChat(dataSnapshot, adapter);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                // 메시지 변경 없음.
             }
 
             @Override
@@ -120,4 +165,5 @@ public class ChatActivity extends AppCompatActivity {
         dbRef.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
         ed_chat.setText(""); //입력창 초기화
     }
+
 }

@@ -1,6 +1,8 @@
 package pyneer.full_time_wannabe.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +31,7 @@ public class ChatAdapter extends BaseAdapter {
     public ChatAdapter() { }    // 빈 생성자
 
     // ArrayList 에 ExamData 객체를 추가하는 메서드
-    public void add(ChatData data)
-    {
+    public void add(ChatData data) {
         chat_list.add(data);
         notifyDataSetChanged();     // 데이터가 변화됨을 알려준다.
     }
@@ -62,11 +63,9 @@ public class ChatAdapter extends BaseAdapter {
     public int getViewTypeCount() { return ITEM_VIEW_TYPE_MAX; }
 
     // 각 항목에 출력될 뷰를 구성하여 반환하는 메서드
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    @SuppressLint("ViewHolder")
+    public View getView(int position, View convertView, ViewGroup parent) {
         final Context context = parent.getContext();
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View view = null;
 
         // 표시할 현재 chat 받아오기
@@ -77,6 +76,7 @@ public class ChatAdapter extends BaseAdapter {
         // convertView 뷰는 어댑터가 현재 가지고 있는 해당 항목의 뷰객체이다.
         // null 이 넘어오는 경우에만 새로 생성하고, 그렇지않은 경우에는 그대로 사용한다.
         if(convertView == null) {
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // 타입에 따라 각기 다른 XML 리소스로 뷰를 생성한다.
             switch(type) {
                 case ITEM_VIEW_TYPE_MYCHAT :
@@ -96,8 +96,17 @@ public class ChatAdapter extends BaseAdapter {
                     tv_msg = (TextView)view.findViewById(R.id.tv_msg);
                     tv_msg.setText(data.getChat());
                     break;
+                default:
+                    view = inflater.inflate(R.layout.content_my_chat, parent, false);
+                    tv_msg = (TextView)view.findViewById(R.id.tv_msg);
+                    tv_msg.setText(data.getChat());
+                    break;
             }
+        }
+        else {
+
         }
         return view;
     }
+
 }
