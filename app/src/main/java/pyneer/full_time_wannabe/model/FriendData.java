@@ -20,9 +20,7 @@ public class FriendData {
         this.type = type;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() { return userName; }
     public int getType() {
         return type;
     }

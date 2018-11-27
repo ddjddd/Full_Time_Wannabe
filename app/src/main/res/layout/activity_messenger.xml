@@ -12,9 +12,7 @@
         android:layout_gravity="bottom"
         android:layout_alignParentTop="true"
         app:itemBackground="@android:color/white"
-        app:menu="@menu/messenger_menu" >
-
-    </android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/messenger_menu" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/tab_container"

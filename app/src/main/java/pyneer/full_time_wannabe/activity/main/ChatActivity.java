@@ -1,8 +1,9 @@
 package pyneer.full_time_wannabe.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
 import pyneer.full_time_wannabe.adapter.ChatAdapter;
 import pyneer.full_time_wannabe.model.ChatData;
+import pyneer.full_time_wannabe.model.ChatListData;
 
 /**
  * Created by ddjdd on 2018-11-04.
@@ -26,7 +28,7 @@ import pyneer.full_time_wannabe.model.ChatData;
 
 public class ChatActivity extends AppCompatActivity {
     private String CHAT_NAME;
-    private String USER_NAME;
+    private String CURRENT_USER_NAME;
     private static final int ITEM_VIEW_TYPE_MYCHAT = 0;
     private static final int ITEM_VIEW_TYPE_OTHERCHAT = 1;
     private static final int ITEM_VIEW_TYPE_OTHERCHAT_SERIES = 2;
@@ -34,11 +36,13 @@ public class ChatActivity extends AppCompatActivity {
     @BindView(R.id.lv_chat) ListView lv_chat;
     @BindView(R.id.ed_chat) EditText ed_chat;
     @BindView(R.id.btn_send) ImageButton btn_send;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     private FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDB.getReference();
 
     ChatAdapter adapter;
+    ChatListData chatListData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,8 +50,11 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
 
-        CHAT_NAME = "Test";
-        USER_NAME = "pyneer";
+        CURRENT_USER_NAME = "pyneer";
+
+        Intent intent = new Intent(this.getIntent());
+        chatListData = (ChatListData) intent.getSerializableExtra("chat_list_data");
+        CHAT_NAME = chatListData.getChatName();
 
         openChat(CHAT_NAME);
     }
@@ -58,8 +65,9 @@ public class ChatActivity extends AppCompatActivity {
         ChatData chatData = dataSnapshot.getValue(ChatData.class);
         // 내 chat 인지 확인
         String tUserName = chatData.getUserName();
-        if(tUserName.equals(USER_NAME)) {
+        if(tUserName.equals(CURRENT_USER_NAME)) {
             chatData.setType(ITEM_VIEW_TYPE_MYCHAT);
+            tmp = tUserName;
         }
         else if (tUserName.equals(tmp)) {
             chatData.setType(ITEM_VIEW_TYPE_OTHERCHAT_SERIES);
@@ -107,10 +115,8 @@ public class ChatActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_send)
     public void onBtnSendClick() {
-        if (ed_chat.getText().toString().equals(""))
-            return;
-
-        ChatData chat = new ChatData(USER_NAME, ed_chat.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
+        if (ed_chat.getText().toString().equals("")) return;
+        ChatData chat = new ChatData(CURRENT_USER_NAME, ed_chat.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
         dbRef.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
         ed_chat.setText(""); //입력창 초기화
     }
