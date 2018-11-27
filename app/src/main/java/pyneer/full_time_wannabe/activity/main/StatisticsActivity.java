@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -35,7 +34,7 @@ public class StatisticsActivity extends AppCompatActivity implements ActivityCom
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ButterKnife.bind(this);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.tab_bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         viewPager.addOnPageChangeListener(onPageChangeListener);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);

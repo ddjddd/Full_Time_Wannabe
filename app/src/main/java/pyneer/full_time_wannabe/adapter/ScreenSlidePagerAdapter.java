@@ -10,13 +10,11 @@ import java.util.List;
 
 public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
-//    private ViewPager mPager;
-//    private PagerAdapter mPageAdapter;
+
 
     public ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);
     }
-
 
     @Override
     public Fragment getItem(int position) {

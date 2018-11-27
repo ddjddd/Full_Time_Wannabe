@@ -13,7 +13,10 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pyneer.full_time_wannabe.R;
+import pyneer.full_time_wannabe.adapter.FriendListAdapter;
 import pyneer.full_time_wannabe.adapter.ScreenSlidePagerAdapter;
+import pyneer.full_time_wannabe.fragment.ChatListFragment;
+import pyneer.full_time_wannabe.fragment.FriendListFragment;
 import pyneer.full_time_wannabe.fragment.MainFragment;
 
 /**
@@ -21,12 +24,12 @@ import pyneer.full_time_wannabe.fragment.MainFragment;
  */
 public class MessengerActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
     @BindView(R.id.tab_container) ViewPager viewPager;
-    @BindView(R.id.tab_bottom_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.navigation) BottomNavigationView bottomNavigationView;
 
-
-    MainFragment mainFragment;
-    MenuItem prevMenu;
+    FriendListFragment friendListFragment;
+    ChatListFragment chatListFragment;
     ScreenSlidePagerAdapter screenSlidePagerAdapter;
+    MenuItem prevMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,16 +37,14 @@ public class MessengerActivity extends AppCompatActivity implements ActivityComp
         setContentView(R.layout.activity_messenger);
         ButterKnife.bind(this);
         viewPager.addOnPageChangeListener(onPageChangeListener);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-
         setViewPager(viewPager);
     }
 
     public void requestPermission(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
         }
-        else{
+        else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
     }
@@ -60,10 +61,11 @@ public class MessengerActivity extends AppCompatActivity implements ActivityComp
     }
 
     private void setViewPager(ViewPager viewPager){
+        friendListFragment = new FriendListFragment();
+        chatListFragment = new ChatListFragment();
         screenSlidePagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-//        mainFragment = new MainFragment();
-//        screenSlidePagerAdapter.addFragment(chatFragment);
-
+        screenSlidePagerAdapter.addFragment(friendListFragment);
+        screenSlidePagerAdapter.addFragment(chatListFragment);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(screenSlidePagerAdapter);
     }
