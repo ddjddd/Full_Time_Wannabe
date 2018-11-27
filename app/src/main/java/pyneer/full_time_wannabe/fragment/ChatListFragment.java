@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +43,7 @@ public class ChatListFragment extends Fragment {
     // ********************************************************************************
     // Temp
     // ********************************************************************************
-    String userName = "pyneer";
+    String CURRENT_USER_NAME = "pyneer";
     // ********************************************************************************
 
 
@@ -89,7 +90,7 @@ public class ChatListFragment extends Fragment {
         adapter = new ChatListAdapter();
         lv_chat_list.setAdapter(adapter);
 
-        dbRef.child("chatlist").child(userName).addChildEventListener(new ChildEventListener() {
+        dbRef.child("chat_list").child(CURRENT_USER_NAME).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 addChatList(dataSnapshot, adapter);
@@ -97,9 +98,6 @@ public class ChatListFragment extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot snapshot :dataSnapshot.getChildren()){
-                    addChatList(snapshot, adapter);
-                }
             }
 
             @Override
@@ -121,8 +119,9 @@ public class ChatListFragment extends Fragment {
 
     @OnClick(R.id.fab_add_chat)
     public void onFabAddChatClick () {
-        ChatListData newChat = new ChatListData("Test");
-        dbRef.child("chatlist").child(userName).push().setValue(newChat);
+        String key = dbRef.child("chat_list").child(CURRENT_USER_NAME).push().getKey();
+        ChatListData newChat = new ChatListData("Test", "@make@"+CURRENT_USER_NAME+"@key@"+key, "@"+CURRENT_USER_NAME, ServerValue.TIMESTAMP);
+        dbRef.child("chat_list").child(CURRENT_USER_NAME).child(newChat.getChatID()).setValue(newChat);
         Toast.makeText(getActivity(), "채팅 추가됨", Toast.LENGTH_LONG).show();
     }
 }

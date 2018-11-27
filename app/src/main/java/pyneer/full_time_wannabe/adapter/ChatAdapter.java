@@ -56,7 +56,7 @@ public class ChatAdapter extends BaseAdapter {
 
     // 인자로 넘어온 값에 해당하는 뷰의 타입을 반환하는 메서드
     @Override
-    public int getItemViewType(int position) { return chat_list.get(position).getType(); }
+    public int getItemViewType(int position) { return chat_list.get(position).type; }
 
     // getView 메서드로 생성될 수 있는 뷰의 수를 반환하는 메서드
     @Override

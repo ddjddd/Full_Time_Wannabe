@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,8 +33,8 @@ import pyneer.full_time_wannabe.model.ChatListData;
  */
 
 public class ChatActivity extends AppCompatActivity {
-    private String CHAT_NAME;
-    private String CURRENT_USER_NAME;
+    private String CHAT_ID;
+    private String CURRENT_USER_NAME, CURRENT_USER_ID;
     private static final int ITEM_VIEW_TYPE_MYCHAT = 0;
     private static final int ITEM_VIEW_TYPE_OTHERCHAT = 1;
     private static final int ITEM_VIEW_TYPE_OTHERCHAT_SERIES = 2;
@@ -57,12 +58,13 @@ public class ChatActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         CURRENT_USER_NAME = "pyneer";
+        CURRENT_USER_ID = "pyneer";
 
         Intent intent = new Intent(this.getIntent());
         chatListData = (ChatListData) intent.getSerializableExtra("chat_list_data");
-        CHAT_NAME = chatListData.getChatName();
-        setToolBar(CHAT_NAME);
-        setChatListener(CHAT_NAME);
+        CHAT_ID = chatListData.getChatID();
+        setToolBar(CHAT_ID);
+        setChatListener(CHAT_ID);
     }
 
     private void setToolBar(String title) {
@@ -161,8 +163,8 @@ public class ChatActivity extends AppCompatActivity {
     @OnClick(R.id.btn_send)
     public void onBtnSendClick() {
         if (ed_chat.getText().toString().equals("")) return;
-        ChatData chat = new ChatData(CURRENT_USER_NAME, ed_chat.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
-        dbRef.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
+        ChatData chat = new ChatData(CURRENT_USER_NAME, CURRENT_USER_ID, ed_chat.getText().toString(), ServerValue.TIMESTAMP); //ChatDTO를 이용하여 데이터를 묶는다.
+        dbRef.child("chat").child(CHAT_ID).push().setValue(chat); // 데이터 푸쉬
         ed_chat.setText(""); //입력창 초기화
     }
 
