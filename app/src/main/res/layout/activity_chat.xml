@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat">
+    tools:context="pyneer.full_time_wannabe.activity.main.ChatActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/al_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_marginBottom="4dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintBottom_toTopOf="@+id/ll_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,59 +27,69 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_chat" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_chat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_above="@+id/ll_send"
+        android:layout_below="@+id/al_toolbar"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="#fff"
         android:orientation="vertical"
-        android:clipToPadding="false"
-        android:focusableInTouchMode="true"
-        tools:context="com.example.scaledrone.chat.MainActivity">
+        app:layout_constraintBottom_toTopOf="@+id/ll_send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/al_toolbar">
 
         <ListView
-            android:id="@+id/messages_view"
+            android:id="@+id/lv_chat"
             android:layout_width="match_parent"
-            android:layout_height="482dp"
+            android:layout_height="0dp"
             android:layout_weight="2"
-            android:divider="#fff" />
+            android:divider="#fff"
+            android:dividerHeight="3dp"
+            android:transcriptMode="alwaysScroll" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="4dp"
         android:background="#fff"
-        android:orientation="horizontal">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_chat">
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
+            android:id="@+id/ed_chat"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:ems="10"
-            android:hint="메세지를 입력하세요."
-            android:inputType="text"
-            android:paddingHorizontal="10dp"
-            android:text="" />
+            android:hint="@string/hint_send_msg"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_base_teal"
+            android:padding="2dp"
+            android:src="@android:drawable/ic_menu_send"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
-    </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginHorizontal="10dp"
-        android:padding="20dp"
-        android:scaleType="fitCenter"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|bottom"
-        app:backgroundTint="@color/colorPrimaryDark"
-
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

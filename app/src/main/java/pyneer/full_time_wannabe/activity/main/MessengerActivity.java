@@ -1,111 +1,113 @@
 package pyneer.full_time_wannabe.activity.main;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
-import pyneer.full_time_wannabe.adapter.ChatAdapter;
-import pyneer.full_time_wannabe.model.ChatData;
+import pyneer.full_time_wannabe.adapter.ScreenSlidePagerAdapter;
+import pyneer.full_time_wannabe.fragment.MainFragment;
 
 /**
- * Created by ddjdd on 2018-11-04.
+ * Created by ddjdd on 2018-11-22.
  */
+public class MessengerActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+    @BindView(R.id.tab_container) ViewPager viewPager;
+    @BindView(R.id.tab_bottom_navigation) BottomNavigationView bottomNavigationView;
 
-public class MessengerActivity extends AppCompatActivity {
-    private String CHAT_NAME;
-    private String USER_NAME;
-    private static final int ITEM_VIEW_TYPE_MYCHAT = 0 ;
-    private static final int ITEM_VIEW_TYPE_OTHERCHAT = 1 ;
 
-    @BindView(R.id.lv_chat) ListView lv_chat;
-    @BindView(R.id.ed_chat) EditText ed_chat;
-    @BindView(R.id.btn_send) Button btn_send;
-
-    private FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = fbDB.getReference();
-
-    ChatAdapter adapter;
+    MainFragment mainFragment;
+    MenuItem prevMenu;
+    ScreenSlidePagerAdapter screenSlidePagerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
         ButterKnife.bind(this);
+        viewPager.addOnPageChangeListener(onPageChangeListener);
 
-        CHAT_NAME = "Test";
-        USER_NAME = "pyneer";
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
-        openChat(CHAT_NAME);
+        setViewPager(viewPager);
     }
 
-
-    private void addMessage(DataSnapshot dataSnapshot, ChatAdapter adapter) {
-        ChatData chatData = dataSnapshot.getValue(ChatData.class);
-        // 내 chat 인지 확인
-        if(chatData.getUserName().equals(USER_NAME)) {
-            chatData.setType(ITEM_VIEW_TYPE_MYCHAT);
+    public void requestPermission(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
         }
-        else {
-            chatData.setType(ITEM_VIEW_TYPE_OTHERCHAT);
+        else{
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
-        adapter.add(chatData);
     }
 
-    // 채팅방 열었을때 내용 표시
-    private void openChat(String chatName) {
-        adapter = new ChatAdapter();
-        lv_chat.setAdapter(adapter);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
-        dbRef.child("chat").child(chatName).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                addMessage(dataSnapshot, adapter);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        switch (requestCode){
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                }
+        }
     }
 
-    @OnClick(R.id.btn_send)
-    public void onBtnSendClick() {
-        if (ed_chat.getText().toString().equals(""))
-            return;
+    private void setViewPager(ViewPager viewPager){
+        screenSlidePagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+//        mainFragment = new MainFragment();
+//        screenSlidePagerAdapter.addFragment(chatFragment);
 
-        ChatData chat = new ChatData(USER_NAME, ed_chat.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
-        dbRef.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
-        ed_chat.setText(""); //입력창 초기화
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setAdapter(screenSlidePagerAdapter);
     }
+
+    ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (prevMenu != null){
+                prevMenu.setChecked(false);
+            }
+            else {
+                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+            }
+            bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            prevMenu = bottomNavigationView.getMenu().getItem(position);
+
+            if (position == 1) {
+                screenSlidePagerAdapter.getItem(1).onResume();
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.tab1:
+                    viewPager.setCurrentItem(0);
+                    break;
+                case R.id.tab2:
+                    viewPager.setCurrentItem(1);
+                    break;
+            }
+            return true;
+        }
+    };
 }

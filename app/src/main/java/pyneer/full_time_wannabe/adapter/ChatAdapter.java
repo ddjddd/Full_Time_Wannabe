@@ -17,9 +17,10 @@ import pyneer.full_time_wannabe.model.ChatData;
  */
 
 public class ChatAdapter extends BaseAdapter {
-    private static final int ITEM_VIEW_TYPE_MYCHAT = 0 ;
-    private static final int ITEM_VIEW_TYPE_OTHERCHAT = 1 ;
-    private static final int ITEM_VIEW_TYPE_MAX = 2 ;
+    private static final int ITEM_VIEW_TYPE_MYCHAT = 0;
+    private static final int ITEM_VIEW_TYPE_OTHERCHAT = 1;
+    private static final int ITEM_VIEW_TYPE_OTHERCHAT_SERIES = 2;
+    private static final int ITEM_VIEW_TYPE_MAX = 3;
 
     // ChatData 객체를 관리하는 ArrayList
     private ArrayList<ChatData> chat_list = new ArrayList<>();
@@ -79,17 +80,21 @@ public class ChatAdapter extends BaseAdapter {
             // 타입에 따라 각기 다른 XML 리소스로 뷰를 생성한다.
             switch(type) {
                 case ITEM_VIEW_TYPE_MYCHAT :
-                    view = inflater.inflate(R.layout.listview_mychat, parent, false);
+                    view = inflater.inflate(R.layout.content_my_chat, parent, false);
                     TextView tv_msg = (TextView)view.findViewById(R.id.tv_msg);
                     tv_msg.setText(data.getChat());
                     break;
                 case ITEM_VIEW_TYPE_OTHERCHAT :
-                    view = inflater.inflate(R.layout.listview_otherchat, parent, false);
+                    view = inflater.inflate(R.layout.content_other_chat, parent, false);
                     tv_msg = (TextView)view.findViewById(R.id.tv_msg);
                     tv_msg.setText(data.getChat());
-                    TextView tv_user = (TextView)view.findViewById(R.id.tv_user);
+                    TextView tv_user = (TextView)view.findViewById(R.id.tv_user_name);
                     tv_user.setText(data.getUserName());
-
+                    break;
+                case ITEM_VIEW_TYPE_OTHERCHAT_SERIES :
+                    view = inflater.inflate(R.layout.content_other_chat_series, parent, false);
+                    tv_msg = (TextView)view.findViewById(R.id.tv_msg);
+                    tv_msg.setText(data.getChat());
                     break;
             }
         }
