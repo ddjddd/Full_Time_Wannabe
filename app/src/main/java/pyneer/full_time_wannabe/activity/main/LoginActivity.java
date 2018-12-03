@@ -1,5 +1,6 @@
 package pyneer.full_time_wannabe.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,11 @@ import pyneer.full_time_wannabe.R;
 import pyneer.full_time_wannabe.api.OnRestApiListener;
 import pyneer.full_time_wannabe.api.RestApiResult;
 import pyneer.full_time_wannabe.api.RestApiTask;
+import pyneer.full_time_wannabe.api.implement.LoginActivity.LoginResult;
 import pyneer.full_time_wannabe.api.implement.Signup;
+import pyneer.full_time_wannabe.app.App;
+import pyneer.full_time_wannabe.utility.SharedPreferencesUtil;
+
 
 /**
  * Log_in activity
@@ -68,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements OnRestApiListene
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                doRegister(dialog.getCustomView());
+                                doRegister(dialog.getCustomView());
                             }
                         })
                         .build();
@@ -76,30 +81,36 @@ public class LoginActivity extends AppCompatActivity implements OnRestApiListene
 
     }
 
-    /*
-     사용자 타입 구분 필요
-     알바생(model name : user) vs. 관리자
-        추가 - 버튼, 회원가입, 관리자 모델
-     */
-
-
-//    private void doRegister(View registerView) {
-////        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
-////        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
-////        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
-//        Signup register = new Signup();
-//        register.setEmail(id);
-//        register.setPw(pw);
-//        register.setName(name);
-//        new RestApiTask(this).execute(register);
-//    }
+    private void doRegister(View registerView) {
+        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
+        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
+        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
+        Signup signup = new Signup();
+        signup.setEmail(id);
+        signup.setPw(pw);
+        signup.setName(name);
+        new RestApiTask(this).execute(signup);
+    }
 
     @Override
     public void onRestApiDone(RestApiResult restApiResult) {
         switch (restApiResult.getApiName()) {
-//            case "login":
-//                break;
-            case "register":
+            case "login":
+                LoginResult loginResult = (LoginResult) restApiResult;
+                if (loginResult.getResult()) {
+                    //로그인 성공
+                    SharedPreferencesUtil.putString("user_email", loginResult.user.getEmail());
+                    SharedPreferencesUtil.putString("user_pw", loginResult.user.getPw());
+//                    Util.updateToken();
+                    App.getAppInstance().setUser(loginResult.user);
+                    //팀 선택 액티비티로 넘어감
+                    startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+                    finish();
+                } else {
+                    new MaterialDialog.Builder(this).content("로그인에 실패했습니다.").show();
+                }
+                break;
+            case "signup":
                 new MaterialDialog.Builder(this).content("가입이 완료되었습니다.").show();
                 break;
         }
