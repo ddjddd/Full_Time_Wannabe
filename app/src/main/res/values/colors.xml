@@ -11,6 +11,30 @@
     <color name="shadow">#090909</color>
 
 
-    <color name="btn_base_teal">#ffa3a5</color>
+    <color name="baseRedLighter">#FFEEED</color>
+    <color name="baseRedLight">#FFD7D4</color>
+    <color name="baseRed">#E3A6A1</color>
+    <color name="baseRedDark">#BF736D</color>
+    <color name="baseRedDarker">#9E4B45</color>
+
+    <color name="baseBlueLighter">#CBCFD9</color>
+    <color name="baseBlueLight">#99A1B4</color>
+    <color name="baseBlue">#707C98</color>
+    <color name="baseBlueDark">#4F5E80</color>
+    <color name="baseBlueDarker">#4F5E80</color>
+
+    <color name="baseYellowLighter">#FFF9ED</color>
+    <color name="baseYellowLight">#FFF1D4</color>
+    <color name="baseYellow">#E3CDA1</color>
+    <color name="baseYellowDark">#BFA46D</color>
+    <color name="baseYellowDarker">#9E8045</color>
+
+    <color name="baseGreenLighter">#D4E4D7</color>
+    <color name="baseGreenLight">#A8CAAE</color>
+    <color name="baseGreen">#7BAE84</color>
+    <color name="baseGreenDark">#53925E</color>
+    <color name="baseGreenDarker">#357941</color>
+
+    <color name="cardview_background">#f0f0f0</color>
 
 </resources>

@@ -13,23 +13,44 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="btn.Default" parent="@android:style/Widget.Button">
-        <item name="android:layout_margin">2dp</item>
-        <item name="android:background">@drawable/btn_base_teal</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />]
+
+    <style name="btn.base" parent="@android:style/Widget.Button">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:fontFamily">@value/bmjua</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />]
+    <style name="tv.base" parent="android:style/Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/baseBlue</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:fontFamily">@value/bmjua</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/tv_base</item>
+    </style>
 
     <style name="chat.txt" parent="android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">7dp</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@value/bmjua</item>
     </style>
 
 </resources>
