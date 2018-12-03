@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "212671712472",
+    "firebase_url": "https://full-time-wannabe.firebaseio.com",
+    "project_id": "full-time-wannabe",
+    "storage_bucket": "full-time-wannabe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212671712472:android:1539924c15530d92",
+        "android_client_info": {
+          "package_name": "pyneer.full_time_wannabe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212671712472-g1nf7dilmpjhdar0a6khl8aphg0jqs0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmKoSvG-bPFTCEZ_3HecpCdnp2MIrNEjo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
