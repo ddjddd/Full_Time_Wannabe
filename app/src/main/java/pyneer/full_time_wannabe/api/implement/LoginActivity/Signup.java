@@ -1,4 +1,4 @@
-package pyneer.full_time_wannabe.api.implement;
+package pyneer.full_time_wannabe.api.implement.LoginActivity;
 
 import pyneer.full_time_wannabe.api.GenericResult;
 import pyneer.full_time_wannabe.api.RestApi;

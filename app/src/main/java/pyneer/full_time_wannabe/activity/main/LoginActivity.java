@@ -20,7 +20,7 @@ import pyneer.full_time_wannabe.api.OnRestApiListener;
 import pyneer.full_time_wannabe.api.RestApiResult;
 import pyneer.full_time_wannabe.api.RestApiTask;
 import pyneer.full_time_wannabe.api.implement.LoginActivity.LoginResult;
-import pyneer.full_time_wannabe.api.implement.Signup;
+import pyneer.full_time_wannabe.api.implement.LoginActivity.Signup;
 import pyneer.full_time_wannabe.app.App;
 import pyneer.full_time_wannabe.utility.SharedPreferencesUtil;
 
