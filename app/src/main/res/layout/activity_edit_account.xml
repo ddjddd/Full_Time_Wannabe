@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
+
+
+    //전체 레이아웃
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        //제목 라인
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+            //android:background="green">
+
+            //여기에 버튼 만들자
+
+
+            <ImageButton
+                android:id="@+id/GotoMenu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+            <!--<Button-->
+                <!--android:id="@+id/GotoMenu"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:text="" />-->
+
+            //여기에 계정 관리 텍스트
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="급여계좌 관리"
+                android:textSize="30dp"
+                android:gravity="center_vertical"/>
+
+
+        </LinearLayout>
+
+
+
+
+        //사진,이름,전화번호 레이아웃
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            //임시 프로필 사진
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars[0]" />
+
+            //리얼 프로필사진
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:id="@+id/main_profile_pic"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="38dp"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginRight="15dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:elevation="2dp"-->
+                <!--app:civ_border_color="#dddddd"-->
+                <!--app:civ_border_width="5dp"-->
+                <!--/>-->
+
+
+
+
+            //이름하고 전화번호 레이아웃
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/kor_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="홍길동"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/eng_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Hong Gil Dong]"
+                        android:textSize="20dp"
+
+                        android:layout_marginLeft="10dp"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/phone_number_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:text="010-1111-1111"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        //수정하는 란
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="급여계좌 수정"
+                android:textSize="20dp"
+                android:layout_margin="@dimen/labels_text_size"/>
+
+            <EditText
+                android:id="@+id/Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="none"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <Button
+                android:id="@+id/Undo"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:layout_marginLeft="20dp"/>
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="수정"
+                android:layout_marginLeft="10dp"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:cardCornerRadius="1dp"-->
+            <!--app:cardElevation="1dp"-->
+            <!--app:cardUseCompatPadding="true">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:padding="12dp">-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/layout_update_timetable"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
+
+
+
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:background="#ccc"></View>-->
+                <!--</LinearLayout>-->
+
+
+
+            <!--</LinearLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+        <!--<ListView-->
+            <!--android:id="@+id/lv_team_list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:divider="@null"-->
+            <!--android:dividerHeight="0dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp">-->
+
+        <!--</ListView>-->
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
+
