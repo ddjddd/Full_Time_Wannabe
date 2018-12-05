@@ -11,9 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
-import pyneer.full_time_wannabe.api.OnRestApiListener;
-import pyneer.full_time_wannabe.api.RestApiResult;
-import pyneer.full_time_wannabe.api.implement.LoginActivity.LoginResult;
 import pyneer.full_time_wannabe.app.App;
 import pyneer.full_time_wannabe.model.ChatListData;
 import pyneer.full_time_wannabe.utility.SharedPreferencesUtil;
@@ -22,7 +19,7 @@ import pyneer.full_time_wannabe.utility.SharedPreferencesUtil;
  * Created by ddjdd on 2018-11-29.
  */
 
-public class AttendanceActivity extends AppCompatActivity implements OnRestApiListener {
+public class AttendanceActivity extends AppCompatActivity {
     @BindView(R.id.tv_wp_title) TextView tv_wp_title;
     @BindView(R.id.tv_wp_time) TextView tv_wp_time;
     @BindView(R.id.tv_wp_alter) TextView tv_wp_alter;
@@ -53,10 +50,4 @@ public class AttendanceActivity extends AppCompatActivity implements OnRestApiLi
 
     }
 
-    @Override
-    public void onRestApiDone(RestApiResult restApiResult) {
-        switch (restApiResult.getApiName()) {
-
-        }
-    }
 }

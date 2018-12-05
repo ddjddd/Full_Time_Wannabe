@@ -1,118 +1,167 @@
 package pyneer.full_time_wannabe.activity.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pyneer.full_time_wannabe.R;
-import pyneer.full_time_wannabe.api.OnRestApiListener;
-import pyneer.full_time_wannabe.api.RestApiResult;
-import pyneer.full_time_wannabe.api.RestApiTask;
-import pyneer.full_time_wannabe.api.implement.LoginActivity.LoginResult;
-import pyneer.full_time_wannabe.api.implement.LoginActivity.Signup;
 import pyneer.full_time_wannabe.app.App;
-import pyneer.full_time_wannabe.utility.SharedPreferencesUtil;
+import pyneer.full_time_wannabe.model.Boss;
+import pyneer.full_time_wannabe.model.Emp;
+import pyneer.full_time_wannabe.utility.Constants;
 
 
 /**
  * Log_in activity
  */
 
-public class LoginActivity extends AppCompatActivity implements OnRestApiListener {
-    @BindView(R.id.ed_email)
-    EditText ed_email;
-    @BindView(R.id.ed_password)
-    EditText ed_password;
-    @BindView(R.id.btn_login)
-    Button btn_login;
-    @BindView(R.id.btn_signup)
-    Button btn_signup;
+public class LoginActivity extends AppCompatActivity{
+    @BindView(R.id.ed_id) EditText ed_id;
+    @BindView(R.id.ed_password) EditText ed_password;
+    @BindView(R.id.rd_boss) RadioButton rd_boss;
+    @BindView(R.id.rd_emp) RadioButton rd_emp;
+
+    private FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = fbDB.getReference();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        requestAppPermissions();
     }
+
+    int REQUEST_WRITE_STORAGE_REQUEST_CODE = 100;
+    private void requestAppPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(LoginActivity.this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1234);
+            }
+        }
+
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        if (hasReadPermissions() && hasWritePermissions()) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, REQUEST_WRITE_STORAGE_REQUEST_CODE);
+    }
+
+    private boolean hasReadPermissions() {
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private boolean hasWritePermissions() {
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+    }
+
 
     @OnClick(R.id.btn_login)
     public void onClickLogin() {
-        String email, password;
-        email = ed_email.getText().toString();
-        password = ed_password.getText().toString();
+        final String id, pw;
+        id = ed_id.getText().toString();
+        pw = ed_password.getText().toString();
 
-        // 로그인 검증 시도
-        if (email.length() < 5 || password.length() < 6) {
-            Toast.makeText(this, "Fill all", Toast.LENGTH_LONG).show();
-            // 메소드화 필요
-        } else {
-            // 로그인 검증 완료시 행동 추가
+
+
+
+        // Login As Boss
+        if(rd_boss.isChecked()) {
+            Query q = dbRef.child("boss").orderByKey().limitToFirst(1).equalTo(id);
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        Boss get = postSnapshot.getValue(Boss.class);
+                        if(get.pw.equals(pw)) {
+//                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//                            App.getAppInstance().setBoss(get);
+//                            App.getAppInstance().setUserType(Constants.BOSS_USER);
+//                            startActivityForResult(intent, 1);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "아이디 없음", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else if(rd_emp.isChecked()) {
+            Query q = dbRef.child("emp").orderByKey().limitToFirst(1).equalTo(id);
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        Emp get = postSnapshot.getValue(Emp.class);
+                        if(get.pw.equals(pw)) {
+                            App.getAppInstance().setEmp(get);
+                            App.getAppInstance().setUserType(Constants.EMP_USER);
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "아이디 없음", Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 
-    @OnClick(R.id.btn_signup)
+    @OnClick(R.id.btn_signup_emp)
     public void onBtnSignup() {
-        // 회원가입용 다이얼로그 생성
-        MaterialDialog dialog =
-                new MaterialDialog.Builder(this)
-                        .title("가입")
-                        .customView(R.layout.dialog_signup, true)
-                        .positiveText("가입하기")
-                        .negativeText(android.R.string.cancel)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                doRegister(dialog.getCustomView());
-                            }
-                        })
-                        .build();
-        dialog.show();
-
-    }
-
-    private void doRegister(View registerView) {
-        String id = ((EditText) registerView.findViewById(R.id.ed_signup_id)).getText().toString();
-        String pw = ((EditText) registerView.findViewById(R.id.ed_signup_password)).getText().toString();
-        String name = ((EditText) registerView.findViewById(R.id.ed_signup_name)).getText().toString();
-        Signup signup = new Signup();
-        signup.setEmail(id);
-        signup.setPw(pw);
-        signup.setName(name);
-        new RestApiTask(this).execute(signup);
+        Intent intent = new Intent(this, SignupActivity.class);
+        this.startActivityForResult(intent, 1);
     }
 
     @Override
-    public void onRestApiDone(RestApiResult restApiResult) {
-        switch (restApiResult.getApiName()) {
-            case "login":
-                LoginResult loginResult = (LoginResult) restApiResult;
-                if (loginResult.getResult()) {
-                    //로그인 성공
-                    SharedPreferencesUtil.putString("user_email", loginResult.user.getEmail());
-                    SharedPreferencesUtil.putString("user_pw", loginResult.user.getPw());
-//                    Util.updateToken();
-                    App.getAppInstance().setUser(loginResult.user);
-                    //팀 선택 액티비티로 넘어감
-                    startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
-                    finish();
-                } else {
-                    new MaterialDialog.Builder(this).content("로그인에 실패했습니다.").show();
-                }
-                break;
-            case "signup":
-                new MaterialDialog.Builder(this).content("가입이 완료되었습니다.").show();
-                break;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                String ret = data.getStringExtra("result");
+                Toast.makeText(getApplicationContext(), ret, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

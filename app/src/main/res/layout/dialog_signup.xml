@@ -6,39 +6,59 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
 
         <EditText
-            android:id="@+id/ed_signup_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="@string/user_name" />
+            android:id="@+id/ed_id"
+            style="@style/ed.base"
+            android:background="@drawable/ed_dialog"
+            android:hint="@string/id"
+            android:inputType="text" />
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
 
         <EditText
-            android:id="@+id/ed_signup_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="@string/user_email" />
+            android:id="@+id/ed_pw"
+            style="@style/ed.base"
+            android:background="@drawable/ed_dialog"
+            android:hint="@string/pw"
+            android:inputType="textPassword" />
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
 
         <EditText
-            android:id="@+id/ed_signup_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:hint="@string/user_pw" />
+            android:id="@+id/ed_name"
+            style="@style/ed.base"
+            android:background="@drawable/ed_dialog"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:privateImeOptions="defaultInputmode=korean" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <EditText
+            android:id="@+id/ed_phone"
+            style="@style/ed.base"
+            android:background="@drawable/ed_dialog"
+            android:hint="@string/phone"
+            android:inputType="phone"/>
+
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

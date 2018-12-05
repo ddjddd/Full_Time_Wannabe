@@ -20,4 +20,8 @@ public class Constants {
             ProfileActivity.class
     };
     public static final boolean DEBUG = true;
+
+    public static final int NONE = 0;
+    public static final int BOSS_USER = 1;
+    public static final int EMP_USER = 2;
 }

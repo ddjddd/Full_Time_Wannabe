@@ -90,16 +90,16 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_settings1:
-                // User chose the "Settings" item, show the app settings UI...
+                // Emp chose the "Settings" item, show the app settings UI...
                 Toast.makeText(getApplicationContext(), "1번 메뉴 클릭", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.action_settings2:
-                // User chose the "Settings" item, show the app settings UI...
+                // Emp chose the "Settings" item, show the app settings UI...
                 Toast.makeText(getApplicationContext(), "2번 메뉴 클릭", Toast.LENGTH_LONG).show();
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
+                // If we got here, the Emp's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }

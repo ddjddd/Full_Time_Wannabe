@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/bmjua"
+        android:text="@string/hint_edit_phone"
+        android:textAlignment="center"
+        android:textColor="@color/baseBlueLight"
+        android:textSize="18sp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <EditText
+            android:id="@+id/ed_phone"
+            style="@style/ed.base"
+            android:background="@drawable/ed_dialog"
+            android:hint="@string/phone"
+            android:inputType="phone" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

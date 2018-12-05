@@ -2,14 +2,14 @@
 <resources>
     <color name="colorPrimary">#E3A6A1</color>
     <color name="colorPrimaryDark">#BC5F6A</color>
-    <color name="colorAccent">#19B3B1</color>
-    <color name="colorFont">#034B61</color>
+    <color name="colorAccent">#7BAE84</color>
+    <color name="colorFont">#707C98</color>
+
     <color name="grey_light">#AAA</color>
     <color name="black">#000</color>
     <color name="white">#FFF</color>
 
     <color name="shadow">#090909</color>
-
 
     <color name="baseRedLighter">#FFEEED</color>
     <color name="baseRedLight">#FFD7D4</color>
@@ -35,6 +35,6 @@
     <color name="baseGreenDark">#53925E</color>
     <color name="baseGreenDarker">#357941</color>
 
-    <color name="cardview_background">#f0f0f0</color>
+    <color name="cardview_background">#D0D0D0</color>
 
 </resources>

@@ -16,20 +16,21 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />]
 
     <style name="btn.base" parent="@android:style/Widget.Button">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:elevation">10dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:fontFamily">@font/bmjua</item>
         <item name="android:textAlignment">center</item>
     </style>
 
     <style name="tv.base" parent="android:style/Widget.TextView">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/baseBlue</item>
         <item name="android:elevation">10dp</item>
@@ -42,6 +43,22 @@
         <item name="android:fontFamily">@font/bmjua</item>
         <item name="android:textAlignment">center</item>
         <item name="android:background">@drawable/tv_base</item>
+    </style>
+
+    <style name="ed.base" parent="android:style/Widget.EditText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/baseBlue</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:fontFamily">@font/bmdohyeon</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <style name="card.base" parent="CardView">
